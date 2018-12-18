@@ -23,7 +23,7 @@ const jestConfig = {
       outputDirectory: '<rootDir>/reports/junit'
     }]
   ],
-  roots: ['<rootDir>/server/'],
+  roots: ['<rootDir>/server/', '<rootDir>/database/models/'],
   setupTestFrameworkScriptFile: '<rootDir>/config/jest/testFramework.js',
   testEnvironment: 'node',
   transform: {
