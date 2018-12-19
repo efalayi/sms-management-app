@@ -31,5 +31,13 @@ jobs:
             - ./node_modules
       - run:
           name: "Run Test"
-          command: yarn test
-      - run: yarn run coverage
+          command: |
+            --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+      - run:
+          name: Run Coverage
+          command: |
+            nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js
+      - store_test_results:
+          path: reports
+      - store_artifacts:
+          path: ./reports/mocha/test-results.xml
