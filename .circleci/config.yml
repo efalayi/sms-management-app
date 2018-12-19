@@ -24,13 +24,15 @@ jobs:
       - restore_cache:
           keys:
           key: 'dependency-cache-{{ checksum "yarn.lock" }}'
-      - run: yarn install
+      - run:
+          name: Install Packages
+          command: yarn install
       - save_cache:
           key: 'dependency-cache-{{ checksum "yarn.lock" }}'
           paths:
             - ./node_modules
       - run:
-          name: npm test
+          name: Run Tests
           command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
           when: always            
       - run:
