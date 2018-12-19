@@ -7,20 +7,39 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12.0
+        environment:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_NAME: sms_api_db
+          DB_PASSWORD: password
+          DB_USERNAME: ci_user
+      - image: 'sameersbn/postgresql:9.6-2'
+        environment:
+          DB_USER: 'ci_user'
+          DB_PASS: password
+          DB_NAME: 'sms_api_db'
     working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
           key: 'dependency-cache-{{ checksum "yarn.lock" }}'
-      - run: yarn install
+      - run:
+          name: Install Packages
+          command: yarn install
       - save_cache:
           key: 'dependency-cache-{{ checksum "yarn.lock" }}'
           paths:
             - ./node_modules
       - run:
-          name: "Run Test"
-          environment:
-            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
-          command: yarn test
-      - run: yarn run coverage
+          name: Run Tests
+          command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+          when: always            
+      - run:
+          name: Run Coverage
+          command: |
+            ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js
+      - store_test_results:
+          path: reports
+      - store_artifacts:
+          path: ./reports/mocha/test-results.xml
