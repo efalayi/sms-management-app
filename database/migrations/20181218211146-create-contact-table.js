@@ -2,9 +2,8 @@ export function up(queryInterface, Sequelize) {
   return queryInterface.createTable('contacts', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.STRING
     },
     firstName: {
       type: Sequelize.STRING

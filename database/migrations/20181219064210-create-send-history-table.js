@@ -1,22 +1,26 @@
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('sms', {
+  return queryInterface.createTable('sendHistory', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    receiverId: {
+    smsId: {
       type: Sequelize.STRING
     },
     senderId: {
-      type: Sequelize.STRING
-    },
-    message: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      references: {
+        model: 'contacts',
+        key: 'id'
+      },
+      onDelete: 'CASCADE',
     },
     status: {
-      type: Sequelize.STRING
+      type: Sequelize.ENUM,
+      values: ['Sent', 'Failed'],
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -28,8 +32,9 @@ export function up(queryInterface, Sequelize) {
     }
   })
 }
+
 export function down(queryInterface) {
-  return queryInterface.dropTable('sms')
+  return queryInterface.dropTable('sendHistory')
 }
 
 export default { up, down }

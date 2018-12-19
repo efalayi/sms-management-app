@@ -20,7 +20,5 @@ jobs:
             - ./node_modules
       - run:
           name: "Run Test"
-          environment:
-            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
           command: yarn test
       - run: yarn run coverage

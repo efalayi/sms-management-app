@@ -1,13 +1,10 @@
 {
   "root": true,
   "env": {
-    "jest": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "extends": "airbnb-base",
-  "globals": {
-    "request": true
-  },
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
