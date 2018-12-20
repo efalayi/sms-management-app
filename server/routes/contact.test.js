@@ -5,7 +5,12 @@ import app from '../app'
 const server = request(app)
 
 describe('GET /users', () => {
-  it('should return a message', async () => {
-    const response = await server.get('/api/v1/contacts/')
+  it('should return a message', (done) => {
+    server
+      .get('/api/v1/contacts/')
+      .end((err, res) => {
+        expect(res.status).to.equal(200)
+        done()
+      })
   })
 })
