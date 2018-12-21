@@ -9,7 +9,7 @@ const getContact = async (contactModel, contactId) => {
     }
     return contact
   } catch (error) {
-    throw (ErrorHelper.getError(error))
+    throw (ErrorHelper.getErrorStatusAndMessage(error))
   }
 }
 

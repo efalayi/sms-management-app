@@ -7,7 +7,7 @@ const listContacts = async (contactModel) => {
     })
     return contactList
   } catch (error) {
-    throw (ErrorHelper.getError(error))
+    throw (ErrorHelper.getErrorStatusAndMessage(error))
   }
 }
 

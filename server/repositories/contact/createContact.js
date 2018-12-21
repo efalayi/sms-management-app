@@ -23,7 +23,7 @@ const createContact = async (contactModel, contactDetails) => {
     }
     return contact
   } catch (error) {
-    const errorMessage = ErrorHelper.getError(error)
+    const errorMessage = ErrorHelper.getErrorStatusAndMessage(error)
     throw (errorMessage)
   }
 }
