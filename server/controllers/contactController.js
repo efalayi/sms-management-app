@@ -21,9 +21,10 @@ class ContactController {
 
   static async listContacts(req, res) {
     try {
-      const contacts = await ContactRepository.listContacts(Contact)
+      const { count, rows } = await ContactRepository.listContacts(Contact)
       res.status(200).send({
-        contacts
+        count,
+        contacts: rows
       })
     } catch (error) {
       res.status(error.status).send({

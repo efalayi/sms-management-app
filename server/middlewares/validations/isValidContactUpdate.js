@@ -29,7 +29,7 @@ const isValidContactUpdate = (req, res, next) => {
   if (!isEmpty) {
     return res.status(400).send({
       errors,
-      message: 'Updated failed'
+      message: 'Contact update failed'
     })
   }
   return next()

@@ -2,10 +2,10 @@ import ErrorHelper from '../../helpers/errorHelper'
 
 const listContacts = async (contactModel) => {
   try {
-    const contacts = await contactModel.findAndCountAll({
+    const contactList = await contactModel.findAndCountAll({
       raw: true
     })
-    return contacts
+    return contactList
   } catch (error) {
     throw (ErrorHelper.getError(error))
   }
