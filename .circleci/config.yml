@@ -32,6 +32,9 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: Reset Database
+          command: yarn run db:reset && yarn run db:migrate
+      - run:
           name: Run Tests
           command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
           when: always            
