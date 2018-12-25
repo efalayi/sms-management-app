@@ -10,7 +10,7 @@ before_install:
 cache:
   yarn: true
 install:
-  - yarn install
+  - yarn
 before_script:
   - psql -c 'create database sms_api_db_test;' -U postgres
   - yarn run db:migrate
