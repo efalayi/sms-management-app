@@ -11,13 +11,13 @@ jobs:
           NODE_ENV: test
           DB_HOST: localhost
           DB_NAME: sms_api_db
-          DB_PASSWORD: circleci_test
-          DB_USERNAME: root
-      - image: circleci/postgres:9.6.2-alpine
+          DB_PASSWORD: password
+          DB_USERNAME: ci_user
+      - image: circleci/postgres:9.6-alpine
         environment:
-          DB_USER: root
-          DB_PASS: circleci_test
-          DB_NAME: sms_api_db
+          POSTGRES_USER: ci_user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: sms_api_db
     working_directory: ~/repo
     steps:
       - checkout
