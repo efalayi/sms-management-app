@@ -13,7 +13,7 @@ jobs:
           DB_NAME: sms_api_db
           DB_PASSWORD: password
           DB_USERNAME: ci_user
-      - image: 'sameersbn/postgresql:9.6-2'
+      - image: circleci/postgres:9.6
         environment:
           DB_USER: 'ci_user'
           DB_PASS: password
