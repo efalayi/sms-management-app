@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "7"
+services:
+  - postgresql
+install:
+  - yarn install
+before_script:
+  - psql -c 'CREATE USER travis_ci_user WITH PASSWORD travis_ci_test';
+  - psql -c 'CREATE DATABASE sms_api_db_test;' -U travis_ci_user
+  - yarn run db:migrate
+script:
+  - ./node_modules/.bin/nyc ./node_modules/.bin/mocha --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
+after_success:
+  - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js
+after_script:
+  - yarn run db:reset
+ 
