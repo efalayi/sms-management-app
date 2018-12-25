@@ -3,8 +3,8 @@ const babelConfig = {
     [
       '@babel/preset-env', {
         targets: {
-          node: true,
-        },
+          node: 'current',
+        }
       },
     ],
 

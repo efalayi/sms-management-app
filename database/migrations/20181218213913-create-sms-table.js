@@ -35,10 +35,7 @@ export function up(queryInterface, Sequelize) {
   })
 }
 export function down(queryInterface) {
-  return queryInterface
-    .removeColumn('sms', 'senderId')
-    .then(() => queryInterface.dropTable('contacts'))
-  // return queryInterface.dropTable('sms')
+  return queryInterface.dropTable('sms')
 }
 
 export default { up, down }

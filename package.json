@@ -16,7 +16,7 @@
     "db:reset": "./node_modules/.bin/sequelize db:migrate:undo:all",
     "lint": "./node_modules/.bin/eslint './**/*.js'",
     "prebuild": "rimraf dist && mkdir dist",
-    "prestart": "npm run build",
+    "prestart": "yarn run build",
     "pretest": "npm-run-all db:reset db:migrate",
     "start": "node dist/server/server.js",
     "start:dev": "nodemon",
@@ -49,10 +49,12 @@
     "supertest": "^3.3.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
+    "pushid": "^1.0.0",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0"
   }

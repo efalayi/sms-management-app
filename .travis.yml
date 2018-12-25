@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - "8"
+services:
+  - postgresql
+sudo: false
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
+  - export PATH=$HOME/.yarn/bin:$PATH
+cache:
+  yarn: true
+install:
+  - yarn
+before_script:
+  - psql -c 'create database sms_api_db_test;' -U postgres
+  - yarn run db:migrate
+script:
+  - ./node_modules/.bin/nyc ./node_modules/.bin/mocha --require @babel/register --recursive ./server/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml --exit
+after_success:
+  - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js
+after_script:
+  - yarn run db:reset
+ 

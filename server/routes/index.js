@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import usersRouter from './users'
+import contactsRouter from './contacts'
 
 const appRouter = new Router()
 
@@ -9,6 +9,6 @@ appRouter.get('/', (req, res) => {
   })
 })
 
-appRouter.use('/users', usersRouter)
+appRouter.use('/contacts', contactsRouter)
 
 export default appRouter

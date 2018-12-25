@@ -1,34 +1,28 @@
-import Sequelize, { Model } from 'sequelize'
-
-class SendHistory extends Model {
-  static fields() {
-    return {
-      id: {
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        unique: true,
-      },
-      smsId: {
-        type: Sequelize.STRING
-      },
-      senderId: {
-        type: Sequelize.STRING
-      },
-      status: {
-        type: Sequelize.ENUM,
-        values: ['sent', 'failed'],
-        allowNull: false
-      }
+export default (sequelize, DataTypes) => {
+  const SendHistory = sequelize.define('sendHistory', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      unique: true,
+    },
+    smsId: {
+      type: DataTypes.STRING
+    },
+    senderId: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.ENUM,
+      values: ['sent', 'failed'],
+      allowNull: false
     }
-  }
+  })
 
-  static options() {
-    return {
-      timestamps: false,
-      tableName: 'sendHistory',
-    }
-  }
+  SendHistory.options = () => ({
+    timestamps: false,
+    tableName: 'sendHistory',
+  })
+
+  return SendHistory
 }
-
-export default SendHistory
