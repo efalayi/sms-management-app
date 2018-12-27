@@ -1,10 +1,10 @@
 import ErrorHelper from '../../helpers/errorHelper'
 
-const getContact = async (contactModel, contactId) => {
+const getContact = async (db, contactId) => {
   try {
-    const contact = await contactModel.findById(contactId)
+    const contact = await db.contact.findById(contactId)
     if (!contact) {
-      const error = ErrorHelper.createError('404', 'Contact does not exist')
+      const error = ErrorHelper.createError('404', `ContactId: ${contactId} does not exist in the database`)
       throw (error)
     }
     return contact

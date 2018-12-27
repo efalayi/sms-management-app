@@ -1,7 +1,7 @@
 import getContact from './getContact'
 
-const deleteContact = async (contactModel, contactId) => {
-  const contact = await getContact(contactModel, contactId)
+const deleteContact = async (db, contactId) => {
+  const contact = await getContact(db, contactId)
   await contact.destroy()
   return contact
 }

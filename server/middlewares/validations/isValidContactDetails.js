@@ -10,12 +10,8 @@ const isValidContactDetails = (req, res, next) => {
 
   CONTACT_FIELDS.forEach((field) => {
     const fieldValue = contactDetails[field]
-    if (!fieldValue) {
-      errors[field] = `${field} is required`
-    } else {
-      const fieldError = validateContactField(field, fieldValue)
-      errors[field] = fieldError
-    }
+    const fieldError = validateContactField(field, fieldValue)
+    errors[field] = fieldError
   })
 
   errors = ObjectHelper.removeBooleanKeysFromObject(errors)

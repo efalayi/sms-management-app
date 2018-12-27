@@ -80,7 +80,7 @@ describe('#Contact endpoints', () => {
         .get(`/api/v1/contacts/${randomContactId}`)
         .end((error, response) => {
           expect(response.status).to.equal(404)
-          expect(response.body.message).to.equal('Contact does not exist')
+          expect(response.body.message).to.equal(`ContactId: ${randomContactId} does not exist in the database`)
           done()
         })
     })
@@ -112,7 +112,7 @@ describe('#Contact endpoints', () => {
         .end((error, response) => {
           expect(response.status).to.equal(404)
           expect(response.body).not.to.have.property('contact')
-          expect(response.body.message).to.equal('Contact does not exist')
+          expect(response.body.message).to.equal(`ContactId: ${randomContactId} does not exist in the database`)
           done()
         })
     })
@@ -164,7 +164,7 @@ describe('#Contact endpoints', () => {
         .end((error, response) => {
           expect(response.status).to.equal(404)
           expect(response.body).not.to.have.property('contact')
-          expect(response.body.message).to.equal('Contact does not exist')
+          expect(response.body.message).to.equal(`ContactId: ${randomContactId} does not exist in the database`)
           done()
         })
     })

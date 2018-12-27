@@ -2,26 +2,17 @@ export function up(queryInterface, Sequelize) {
   return queryInterface.createTable('receiveHistory', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     },
-    smsId: {
+    shortMessageId: {
       type: Sequelize.STRING,
-      references: {
-        model: 'sms',
-        key: 'id'
-      },
-      onDelete: 'CASCADE'
+      allowNull: false
     },
     receiverId: {
-      allowNull: false,
       type: Sequelize.STRING,
-      references: {
-        model: 'contacts',
-        key: 'id'
-      },
-      onDelete: 'CASCADE',
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
@@ -34,7 +25,8 @@ export function up(queryInterface, Sequelize) {
   })
 }
 export function down(queryInterface) {
-  return queryInterface.dropTable('receiveHistory')
+  return queryInterface
+    .dropTable('receiveHistory')
 }
 
 export default { up, down }

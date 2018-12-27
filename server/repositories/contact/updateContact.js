@@ -1,9 +1,9 @@
 import ErroHelper from '../../helpers/errorHelper'
 import getContact from './getContact'
 
-const updateContact = async (contactModel, contactId, contactUpdate) => {
+const updateContact = async (db, contactId, contactUpdate) => {
   try {
-    const contact = await getContact(contactModel, contactId)
+    const contact = await getContact(db, contactId)
     const updatedContact = await contact.update(contactUpdate)
     return updatedContact.dataValues
   } catch (error) {

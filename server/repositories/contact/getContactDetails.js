@@ -1,7 +1,7 @@
 import getContact from './getContact'
 
-const getContactDetails = async (contactModel, contactId) => {
-  const contact = await getContact(contactModel, contactId)
+const getContactDetails = async (db, contactId) => {
+  const contact = await getContact(db, contactId)
   return contact.dataValues
 }
 

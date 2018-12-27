@@ -2,24 +2,20 @@ export function up(queryInterface, Sequelize) {
   return queryInterface.createTable('sendHistory', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     },
-    smsId: {
-      type: Sequelize.STRING
+    shortMessageId: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     senderId: {
       type: Sequelize.STRING,
-      references: {
-        model: 'contacts',
-        key: 'id'
-      },
-      onDelete: 'CASCADE',
+      allowNull: false
     },
     status: {
-      type: Sequelize.ENUM,
-      values: ['Sent', 'Failed'],
+      type: Sequelize.STRING,
       allowNull: false
     },
     createdAt: {
