@@ -8,18 +8,18 @@ export function up(queryInterface, Sequelize) {
     senderId: {
       type: Sequelize.STRING,
       allowNull: false,
-      onDelete: 'CASCADE',
       references: {
         model: 'contacts',
         referenceKey: 'id'
-      }
+      },
+      onDelete: 'cascade',
     },
     receiverIds: {
       type: Sequelize.STRING,
       allowNull: false
     },
     message: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
       allowNull: false
     },
     status: {

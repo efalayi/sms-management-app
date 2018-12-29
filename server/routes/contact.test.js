@@ -57,7 +57,7 @@ describe('#Contact endpoints', () => {
           expect(response.body).to.have.property('count')
           expect(response.body).to.have.property('contacts')
           expect(response.body.contacts).to.be.an('array')
-          expect(response.body.contacts).to.have.lengthOf(1)
+          expect(response.body.contacts).to.have.lengthOf(4)
           done()
         })
     })
@@ -94,6 +94,45 @@ describe('#Contact endpoints', () => {
           expect(returnedContact.firstName).to.equal(createdContact.firstName)
           expect(returnedContact.lastName).to.equal(createdContact.lastName)
           expect(returnedContact.phoneNumber).to.equal(createdContact.phoneNumber)
+          done()
+        })
+    })
+  })
+
+  describe('GET /api/v1/contacts/:contactId/messages', () => {
+    it('should return error if contact does not exist', (done) => {
+      const randomContactId = pushId()
+      server
+        .get(`/api/v1/contacts/${randomContactId}/messages`)
+        .end((error, response) => {
+          expect(response.status).to.equal(404)
+          expect(response.body).not.to.have.property('contact')
+          expect(response.body.message).to.equal(`ContactId: ${randomContactId} does not exist in the database`)
+          done()
+        })
+    })
+    it('should return all contact received and sent messages', (done) => {
+      server
+        .get(`/api/v1/contacts/${createdContact.id}/messages`)
+        .end((error, response) => {
+          const { contact } = response.body
+          expect(response.status).to.equal(200)
+          expect(contact).to.have.property('receivedMessages')
+          expect(contact).to.have.property('sentMessages')
+          expect(contact.receivedMessages).to.have.lengthOf(0)
+          expect(contact.sentMessages).to.have.lengthOf(0)
+          done()
+        })
+    })
+    it('should return contact received messages', (done) => {
+      server
+        .get(`/api/v1/contacts/${createdContact.id}/messages?type=received`)
+        .end((error, response) => {
+          const { contact } = response.body
+          expect(response.status).to.equal(200)
+          expect(contact).to.have.property('receivedMessages')
+          expect(contact).not.to.have.property('sentMessages')
+          expect(contact.receivedMessages).to.have.lengthOf(0)
           done()
         })
     })

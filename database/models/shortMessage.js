@@ -18,7 +18,7 @@ class ShortMessage extends Sequelize.Model {
       },
       message: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       status: {
         type: DataTypes.ENUM,

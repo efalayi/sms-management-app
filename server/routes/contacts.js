@@ -12,6 +12,10 @@ contactRouter.get(
   '/:contactId', isValidContactId, ContactController.getContactDetails
 )
 
+contactRouter.get(
+  '/:contactId/messages', isValidContactId, ContactController.listContactMessages
+)
+
 contactRouter.post(
   '/', isValidContactDetails, ContactController.createContact
 )

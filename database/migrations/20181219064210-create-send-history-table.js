@@ -8,11 +8,21 @@ export function up(queryInterface, Sequelize) {
     },
     shortMessageId: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'shortMessages',
+        referenceKey: 'id',
+      },
+      onDelete: 'cascade',
     },
     senderId: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'contacts',
+        referenceKey: 'id',
+      },
+      onDelete: 'cascade',
     },
     status: {
       type: Sequelize.STRING,

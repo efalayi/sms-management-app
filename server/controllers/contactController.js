@@ -81,6 +81,22 @@ class ContactController {
       })
     }
   }
+
+  static async listContactMessages(req, res) {
+    const { contactId } = req.params
+    try {
+      const contactMessages = await ContactRepository.listContactMessages(
+        db, contactId, req.query
+      )
+      res.status(200).send({
+        contact: contactMessages,
+      })
+    } catch (error) {
+      res.status(error.status).send({
+        message: `${error.message}`
+      })
+    }
+  }
 }
 
 
