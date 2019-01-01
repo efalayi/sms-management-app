@@ -1,27 +1,30 @@
 export function up(queryInterface, Sequelize) {
-  return queryInterface.createTable('sms', {
+  return queryInterface.createTable('shortMessages', {
     id: {
       allowNull: false,
       primaryKey: true,
       type: Sequelize.STRING
     },
-    receiverId: {
-      type: Sequelize.STRING
-    },
     senderId: {
       type: Sequelize.STRING,
-      onDelete: 'CASCADE',
+      allowNull: false,
       references: {
         model: 'contacts',
-        key: 'id'
-      }
+        referenceKey: 'id'
+      },
+      onDelete: 'cascade',
+    },
+    receiverIds: {
+      type: Sequelize.STRING,
+      allowNull: false
     },
     message: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT,
+      allowNull: false
     },
     status: {
       type: Sequelize.ENUM,
-      values: ['Pending', 'Sent', 'Failed'],
+      values: ['failed', 'pending', 'sent'],
       allowNull: false,
     },
     createdAt: {
@@ -35,7 +38,7 @@ export function up(queryInterface, Sequelize) {
   })
 }
 export function down(queryInterface) {
-  return queryInterface.dropTable('sms')
+  return queryInterface.dropTable('shortMessages')
 }
 
 export default { up, down }

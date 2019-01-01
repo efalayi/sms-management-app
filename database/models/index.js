@@ -1,12 +1,12 @@
-import fs from 'fs'
-import path from 'path'
 import Sequelize from 'sequelize'
 import databaseConfig from '../../config/database'
+import ContactModel from './contact'
+import ReceiveHistoryModel from './receiveHistory'
+import SendHistoryModel from './sendHistory'
+import ShortMessageModel from './shortMessage'
 
-const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
 const config = databaseConfig[env]
-const db = {}
 
 let sequelize
 if (config.use_env_variable) {
@@ -15,21 +15,20 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config)
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
-  .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file))
-    db[model.name] = model
-  })
+const models = {
+  contact: ContactModel.init(sequelize, Sequelize),
+  receiveHistory: ReceiveHistoryModel.init(sequelize, Sequelize),
+  sendHistory: SendHistoryModel.init(sequelize, Sequelize),
+  shortMessage: ShortMessageModel.init(sequelize, Sequelize),
+}
 
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db)
-  }
-})
+Object.values(models)
+  .filter(model => typeof model.associate === 'function')
+  .forEach(model => model.associate(models))
 
-db.sequelize = sequelize
-db.Sequelize = Sequelize
+const db = {
+  ...models,
+  sequelize
+}
 
 export default db

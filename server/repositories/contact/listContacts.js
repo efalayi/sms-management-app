@@ -1,14 +1,8 @@
-import ErrorHelper from '../../helpers/errorHelper'
-
-const listContacts = async (contactModel) => {
-  try {
-    const contactList = await contactModel.findAndCountAll({
-      raw: true
-    })
-    return contactList
-  } catch (error) {
-    throw (ErrorHelper.getErrorStatusAndMessage(error))
-  }
+const listContacts = async (db) => {
+  const contactList = await db.contact.findAndCountAll({
+    raw: true
+  })
+  return contactList
 }
 
 export default listContacts

@@ -1,23 +1,32 @@
-export default (sequelize, DataTypes) => {
-  const ReceiveHistory = sequelize.define('receiveHistory', {
-    id: {
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-      unique: true,
-    },
-    smsId: {
-      type: DataTypes.STRING
-    },
-    receiverId: {
-      type: DataTypes.STRING
-    }
-  })
 
-  ReceiveHistory.options = () => ({
-    timestamps: false,
-    tableName: 'receiveHistory',
-  })
+import Sequelize from 'sequelize'
 
-  return ReceiveHistory
+class ReceiveHistory extends Sequelize.Model {
+  static init(sequelize, DataTypes) {
+    return super.init(
+      {
+        id: {
+          type: DataTypes.UUID,
+          primaryKey: true,
+          defaultValue: DataTypes.UUIDV4
+        },
+        shortMessageId: {
+          type: DataTypes.STRING,
+          allowNull: false
+        },
+        receiverId: {
+          type: DataTypes.STRING,
+          allowNull: false
+        }
+      },
+      {
+        timestamps: true,
+        modelName: 'receiveHistory',
+        freezeTableName: true,
+        sequelize
+      }
+    )
+  }
 }
+
+export default ReceiveHistory

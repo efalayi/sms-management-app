@@ -14,7 +14,25 @@ const removeBooleanKeysFromObject = (objectValue) => {
   return filteredError
 }
 
+const removeBooleanValuesFromArray = (arrayValue) => {
+  const filteredArray = arrayValue.filter(value => typeof value !== 'boolean')
+  return filteredArray
+}
+
+const removeNullKeysFromObject = (objectValue) => {
+  const objectKeys = Object.keys(objectValue)
+  const filteredError = {}
+  objectKeys.forEach((key) => {
+    if (objectValue[key] !== null) {
+      filteredError[key] = objectValue[key]
+    }
+  })
+  return filteredError
+}
+
 export default {
   isEmpty,
-  removeBooleanKeysFromObject
+  removeBooleanKeysFromObject,
+  removeBooleanValuesFromArray,
+  removeNullKeysFromObject
 }

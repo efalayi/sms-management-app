@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
 import ObjectHelper from './objectHelper'
 
@@ -22,6 +23,15 @@ describe('#ObjectHelper', () => {
       expect(filteredObject).not.to.have.property('booleanValue')
       expect(filteredObject).to.have.property('stringValue')
       expect(filteredObject).to.have.property('numericValue')
+    })
+  })
+
+  describe('#removeBooleanValuesFromArray', () => {
+    it('should remove boolean key values from array', () => {
+      const sampleArray = [true, 'sample', 10]
+      const filteredArray = ObjectHelper.removeBooleanValuesFromArray(sampleArray)
+      expect(filteredArray).not.to.deep.equal(sampleArray)
+      expect(filteredArray.includes(true)).to.be.false
     })
   })
 })

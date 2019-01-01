@@ -3,26 +3,31 @@ import listContacts from './listContacts'
 import getContactDetails from './getContactDetails'
 import updateContact from './updateContact'
 import deleteContact from './deleteContact'
+import listContactMessages from './listContactMessages'
 
 class ContactRepository {
-  static createContact(contactModel, contactDetails) {
-    return createContact(contactModel, contactDetails)
+  static createContact(db, contactDetails) {
+    return createContact(db, contactDetails)
   }
 
-  static listContacts(contactModel) {
-    return listContacts(contactModel)
+  static listContacts(db) {
+    return listContacts(db)
   }
 
-  static getContactDetails(contactModel, contactId) {
-    return getContactDetails(contactModel, contactId)
+  static getContactDetails(db, contactId) {
+    return getContactDetails(db, contactId)
   }
 
-  static updateContact(contactModel, contactId, contactUpdate) {
-    return updateContact(contactModel, contactId, contactUpdate)
+  static updateContact(db, contactId, contactUpdate) {
+    return updateContact(db, contactId, contactUpdate)
   }
 
-  static deleteContact(contactModel, contactId) {
-    return deleteContact(contactModel, contactId)
+  static deleteContact(db, contactId) {
+    return deleteContact(db, contactId)
+  }
+
+  static listContactMessages(db, contactId, query) {
+    return listContactMessages(db, contactId, query)
   }
 }
 

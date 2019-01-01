@@ -1,13 +1,13 @@
 import Models from '../../database/models'
 import ContactRepository from '../repositories/contact'
 
-const Contact = Models.contact
+const db = Models
 
 class ContactController {
   static async createContact(req, res) {
     const contactDetails = req.body
     try {
-      const contact = await ContactRepository.createContact(Contact, contactDetails)
+      const contact = await ContactRepository.createContact(db, contactDetails)
       res.status(201).send({
         contact,
         message: 'Contact was successfully created'
@@ -21,7 +21,7 @@ class ContactController {
 
   static async listContacts(req, res) {
     try {
-      const { count, rows } = await ContactRepository.listContacts(Contact)
+      const { count, rows } = await ContactRepository.listContacts(db)
       res.status(200).send({
         count,
         contacts: rows
@@ -36,7 +36,7 @@ class ContactController {
   static async getContactDetails(req, res) {
     const { contactId } = req.params
     try {
-      const contact = await ContactRepository.getContactDetails(Contact, contactId)
+      const contact = await ContactRepository.getContactDetails(db, contactId)
       res.status(200).send({
         contact
       })
@@ -52,7 +52,7 @@ class ContactController {
     const contactUpdate = req.body
     try {
       const updatedContact = await ContactRepository.updateContact(
-        Contact, contactId, contactUpdate
+        db, contactId, contactUpdate
       )
       res.status(200).send({
         contact: updatedContact,
@@ -69,11 +69,27 @@ class ContactController {
     const { contactId } = req.params
     try {
       const deletedContact = await ContactRepository.deleteContact(
-        Contact, contactId
+        db, contactId
       )
       res.status(200).send({
         contact: deletedContact,
         message: `Contact ${deletedContact.id} was successfully deleted`
+      })
+    } catch (error) {
+      res.status(error.status).send({
+        message: `${error.message}`
+      })
+    }
+  }
+
+  static async listContactMessages(req, res) {
+    const { contactId } = req.params
+    try {
+      const contactMessages = await ContactRepository.listContactMessages(
+        db, contactId, req.query
+      )
+      res.status(200).send({
+        contact: contactMessages,
       })
     } catch (error) {
       res.status(error.status).send({

@@ -1,11 +1,11 @@
 import pushID from 'pushid'
 import ErrorHelper from '../../helpers/errorHelper'
 
-const createContact = async (contactModel, contactDetails) => {
+const createContact = async (db, contactDetails) => {
   const contactId = pushID()
   const { firstName, lastName, phoneNumber } = contactDetails
   try {
-    const [contact, created] = await contactModel.findOrCreate({
+    const [contact, created] = await db.contact.findOrCreate({
       where: {
         phoneNumber
       },
