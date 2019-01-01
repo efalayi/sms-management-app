@@ -15,11 +15,7 @@ const databaseConfig = {
     dialect: DB_DIALECT
   },
   production: {
-    username: dbUserName,
-    password: dbPassword,
-    database: dbName,
-    host: dbHost,
-    dialect: DB_DIALECT
+    use_env_variable: 'DATABASE_URL'
   },
   test: {
     username: dbUserName,
