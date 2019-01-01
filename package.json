@@ -7,8 +7,9 @@
   "author": "Esther Falayi <esther.falayi@andela.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npm-run-all build:config build:server",
-    "build:config": "babel --root-mode upward config/envVariables.js -d dist/config",
+    "build": "npm-run-all build:config build:db build:server",
+    "build:config": "babel --root-mode upward config -d dist/config",
+    "build:db": "babel --root-mode upward database/models -d dist/database/models",
     "build:server": "babel --root-mode upward server -d dist/server",
     "build:dev:server": "babel-node server/server.js",
     "coverage": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
@@ -56,6 +57,7 @@
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
     "pushid": "^1.0.0",
+    "rimraf": "^2.6.2",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0"
   }
