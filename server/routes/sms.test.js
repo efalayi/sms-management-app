@@ -16,7 +16,7 @@ describe('#SMS routes', () => {
         done()
       })
   })
-  describe('POST /api/v1/sms/send', () => {
+  describe('POST /api/v1/sms/create', () => {
     it('should return an error if sms details are not included', (done) => {
       server
         .post('/api/v1/sms/create')
