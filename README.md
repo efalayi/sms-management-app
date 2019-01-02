@@ -21,13 +21,16 @@ This API does not send SMS but only keeps record of sent or received sms message
 - Point your browser to `localhost`, using the port number defined in your `.env file`.
 - Alternatively, you can access the API on [https://sms-management-app.herokuapp.com/api/v1/](https://sms-management-app.herokuapp.com/api/v1/)
 
-#### Testing
+##### Testing
 Server modules were tested using Mocha and Supertest
 
-###### NPM Scripts
+##### NPM Scripts
 To make development easier, some NPM scripts were written:
 - `yarn test` runs test for server modules using Mocha
 - `yarn run start:dev` runs app on local machine
+
+##### API Documentation
+[https://documenter.getpostman.com/view/1997055/RznBP1bD](https://documenter.getpostman.com/view/1997055/RznBP1bD)
 
 ***
 ##### License
