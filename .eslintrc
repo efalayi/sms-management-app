@@ -1,0 +1,45 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "import"
+  ],
+  "rules": {
+    "comma-dangle": "off",
+    "import/extensions": [
+      "off",
+      "never"
+    ],
+    "import/no-extraneous-dependencies": "off",
+    "no-console": "warn",
+    "no-param-reassign": "error",
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": true,
+          "object": true
+        },
+        "AssignmentExpression": {
+          "array": true,
+          "object": false
+        }
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
+    "semi": [
+      "error",
+      "never"
+    ]
+  }
+}
