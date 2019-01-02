@@ -27,7 +27,7 @@ const updateHistory = async (db, senderId, receiverIds, createdSMS) => {
   }
 }
 
-const sendSMS = async (db, newMessageRecord) => {
+const createSmsRecord = async (db, newMessageRecord) => {
   const {
     senderId, receiverIds, message, status
   } = newMessageRecord
@@ -55,4 +55,4 @@ const sendSMS = async (db, newMessageRecord) => {
   }
 }
 
-export default sendSMS
+export default createSmsRecord

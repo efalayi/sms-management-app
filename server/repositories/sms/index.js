@@ -1,9 +1,9 @@
-import sendSMS from './sendSMS'
+import createSmsRecord from './createSmsRecord'
 import listAllMessages from './listAllMessages'
 
 class SMSRepository {
-  static sendSMS(db, newMessageRecord) {
-    return sendSMS(db, newMessageRecord)
+  static createSmsRecord(db, newMessageRecord) {
+    return createSmsRecord(db, newMessageRecord)
   }
 
   static listAllMessages(db) {

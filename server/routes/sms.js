@@ -5,6 +5,6 @@ import isValidSmsDetails from '../middlewares/validations/isValidSmsDetails'
 const smsRouter = new Router()
 
 smsRouter.get('/all', SMSController.listAllMessages)
-smsRouter.post('/send', isValidSmsDetails, SMSController.sendSMS)
+smsRouter.post('/create', isValidSmsDetails, SMSController.createSmsRecord)
 
 export default smsRouter

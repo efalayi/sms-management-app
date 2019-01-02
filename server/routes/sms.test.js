@@ -19,7 +19,7 @@ describe('#SMS routes', () => {
   describe('POST /api/v1/sms/send', () => {
     it('should return an error if sms details are not included', (done) => {
       server
-        .post('/api/v1/sms/send')
+        .post('/api/v1/sms/create')
         .end((error, response) => {
           expect(response.body).to.have.property('errors')
           expect(response.body.errors).to.have.property('senderId')
@@ -33,7 +33,7 @@ describe('#SMS routes', () => {
     it('should return an error if senderId does not exist', (done) => {
       const newSmsRecord = ShortMessageFactory.build()
       server
-        .post('/api/v1/sms/send')
+        .post('/api/v1/sms/create')
         .send(newSmsRecord)
         .end((error, response) => {
           expect(response.status).to.equal(400)
@@ -50,7 +50,7 @@ describe('#SMS routes', () => {
         status: 'terminated'
       })
       server
-        .post('/api/v1/sms/send')
+        .post('/api/v1/sms/create')
         .send(newMessageRecord)
         .end((error, response) => {
           expect(response.status).to.equal(500)
@@ -66,7 +66,7 @@ describe('#SMS routes', () => {
         status: 'sent'
       })
       server
-        .post('/api/v1/sms/send')
+        .post('/api/v1/sms/create')
         .send(newMessageRecord)
         .end((error, response) => {
           const { newSMSRecord } = response.body

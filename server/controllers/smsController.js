@@ -4,9 +4,9 @@ import SMSRepository from '../repositories/sms'
 const db = Models
 
 class SMSController {
-  static async sendSMS(req, res) {
+  static async createSmsRecord(req, res) {
     try {
-      const createdSMSRecord = await SMSRepository.sendSMS(db, req.body)
+      const createdSMSRecord = await SMSRepository.createSmsRecord(db, req.body)
       res.status(201).send({
         newSMSRecord: createdSMSRecord,
         message: 'New SMS record was successfully created'
